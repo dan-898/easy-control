@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=889900
+      - POSTGRES_DB=auth_db
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./auth-backend
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./auth-backend:/app
+      - ./auth-backend/.env.docker:/app/.env.docker
+    environment:
+      - ENVIRONMENT=docker
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+
+
+volumes:
+  postgres_data:
