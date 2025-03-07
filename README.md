@@ -21,7 +21,7 @@ The project is divided into two main parts:
 
 ### Backend (`auth-backend`)
 
-- Built with Python (specific framework not specified, possibly Flask or FastAPI)
+- Built with Python (specific framework FastAPI)
 - Uses Alembic for database migrations
 - Dockerized for easy deployment
 
